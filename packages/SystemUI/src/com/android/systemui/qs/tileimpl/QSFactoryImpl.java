@@ -40,6 +40,7 @@ import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
+import com.android.systemui.qs.tiles.HWKeysTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LiveDisplayTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -100,6 +101,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<VpnTile> mVpnTileProvider;
     private final Provider<LiveDisplayTile> mLiveDisplayTileProvider;
     private final Provider<UsbTetherTile> mUsbTetherTileProvider;
+    private final Provider<HWKeysTile> mHWKeysTileProvider;
 
     private QSTileHost mHost;
 
@@ -132,7 +134,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<VpnTile> vpnTileProvider,
             Provider<LiveDisplayTile> liveDisplayTileProvider,
-            Provider<UsbTetherTile> usbTetherTileProvider) {
+            Provider<UsbTetherTile> usbTetherTileProvider,
+            Provider<HWKeysTile> hWKeysTileProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
@@ -162,6 +165,7 @@ public class QSFactoryImpl implements QSFactory {
         mVpnTileProvider = vpnTileProvider;
         mLiveDisplayTileProvider = liveDisplayTileProvider;
         mUsbTetherTileProvider = usbTetherTileProvider;
+        mHWKeysTileProvider = hWKeysTileProvider;
     }
 
     public void setHost(QSTileHost host) {
@@ -245,6 +249,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mLiveDisplayTileProvider.get();
             case "usb_tether":
                 return mUsbTetherTileProvider.get();
+            case "hwkeys":
+                return mHWKeysTileProvider.get();
         }
 
         // Intent tiles.
